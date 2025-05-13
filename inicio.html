@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tortillería "El Maíz Feliz" | Tortillas artesanales</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --yellow: #FFD700;
+            --orange: #d9bc99;
+            --red: #6a4f05;
+            --brown: #8B4513;
+            --light-brown: #F5DEB3;
+            --white: #FFFFFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Noto Sans Display", sans-serif;
+        }
+        
+        @font-face {
+            font-family: "Noto Sans Display", sans-serif;
+            src: url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
+        }
+        
+        body {
+            background-color: var(--light-brown);
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        /* Fondos PNG */
+        .texture-bg {
+            background-image: url('https://www.transparenttextures.com/patterns/cartographer.png');
+            background-repeat: repeat;
+            background-blend-mode: multiply;
+        }
+        
+        .corn-bg {
+            background-image: url('https://www.transparenttextures.com/patterns/maize.png');
+            background-repeat: repeat;
+            opacity: 0.1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        .tortilla-pattern {
+            background-image: url('https://www.transparenttextures.com/patterns/tortilla.png');
+            background-repeat: repeat;
+            opacity: 05;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        /* Animaciones */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+       
+             /* Header */
+        .header {
+            background-color: #5E2C04;
+            padding: 1rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .corn-animation {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.2;
+            animation: float 6s infinite ease-in-out;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            animation: pulse 2s infinite;
+        }
+        
+        .logo img {
+            height: 80px;
+            margin-right: 1rem;
+        }
+        
+        .logo-text {
+            color: var(--white);
+        }
+        
+        .logo-text h1 {
+            font-size: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .logo-text p {
+            font-size: 1rem;
+            font-style: italic;
+        }
+        
+        .nav-toggle {
+            background-color: #333;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: none;
+        }
+        
+        /* Navegación */
+        .nav {
+            display: flex;
+            list-style: none;
+            background-color: #5E2C04;
+        }
+        
+        .nav li {
+            margin-left: 1.5rem;
+            
+        }
+        
+        .nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav a:hover {
+            background-color: var(--yellow);
+            color: var(--brown);
+            transform: translateY(-3px);
+        }
+        
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background-color: var(--yellow);
+            transition: width 0.3s ease;
+        }
+        
+        .nav a:hover::after {
+            width: 70%;
+        }
+        /* Hero Section */
+        .hero {
+            background: 
+                url('vista/componentes/img/Sin\ título-1-05.png') top/100% auto no-repeat,
+                url('') center/cover;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(139, 69, 19, 0.8), rgba(255, 140, 0, 0.6));
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+            color: var(--white);
+            animation: slideIn 1s ease-out;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--yellow);
+            color: var(--brown);
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+            background-color: var(--white);
+        }
+        
+        /* Tortilla Animation */
+        .tortilla {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: url('') center/contain no-repeat;
+            animation: float 4s infinite ease-in-out;
+            opacity: 0.8;
+            z-index: 2;
+        }
+        
+        /* Products Section */
+        .products {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .products::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('vista/componentes/img/maiz-5135234_1280-02.png');
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--brown);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(to right, var(--orange), var(--red));
+            margin: 0.5rem auto;
+            border-radius: 5px;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .product-card {
+            background-color: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            background-image: url('vista/componentes/img/chips-maiz-forma-triangular-levitar-sobre-fondo-blanco_485709-62_preview_rev_1.png');
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+        }
+        
+        .product-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover .product-img {
+            transform: scale(1.1);
+        }
+        
+        .product-content {
+            padding: 1.5rem;
+            background-color: rgba(255,255,255,0.8);
+        }
+        
+        .product-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--brown);
+        }
+        
+        .product-price {
+            font-size: 1.25rem;
+            color: var(--red);
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .product-desc {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: var(--yellow);
+            color: var(--brown);
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            animation: pulse 2s infinite;
+            z-index: 2;
+        }
+        
+        /* About Section */
+        .about {
+            background: 
+                url('vista/componentes/img/Sin\ título-1-03.png') top/100% auto no-repeat,
+                linear-gradient(135deg, var(--orange), var(--red));
+            padding: 4rem 2rem;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .about-text p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .about-image {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            transition: transform 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('vista/componentes/img/maiz-5135234_1280-02.png');
+            opacity: 0.1;
+            z-index: 1;
+        }
+        
+        .about-image:hover {
+            transform: rotate(-5deg) scale(1.05);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('vista/componentes/img/Sin\ título-1-05.png');
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-card {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            position: relative;
+            transition: all 0.3s ease;
+            background-image: url('https://www.transparenttextures.com/patterns/rice-paper-3.png');
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            font-size: 5rem;
+            color: var(--yellow);
+            opacity: 0.2;
+            font-family: serif;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .testimonial-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1rem;
+        }
+        
+        .author-name {
+            font-weight: bold;
+            color: var(--brown);
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 4rem 2rem;
+            position: relative;
+            background: url('https://www.transparenttextures.com/patterns/cardboard.png');
+        }
+        
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .contact-info {
+            animation: fadeIn 1s ease-out;
+            background-color: rgba(255,255,255,0.9);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--brown);
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--orange);
+            margin-right: 1rem;
+            width: 40px;
+            height: 40px;
+            background-color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .contact-form {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            animation: fadeIn 1s ease-out 0.3s both;
+            background-image: url('https://www.transparenttextures.com/patterns/rice-paper.png');
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--orange);
+            box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.2);
+            outline: none;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        .footer {
+            background: 
+                url('vista/componentes/img/Sin\ título-1-04.png') top/100% auto no-repeat,
+                linear-gradient(135deg, var(--brown), #5E2C04);
+            color: var(--white);
+            padding: 6rem 2rem 3rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-link {
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: var(--yellow);
+            transform: translateY(-2px);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .social-link {
+            color: var(--white);
+            font-size: 1.5rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background-color: white;
+            color: var(--brown);
+            transform: translateY(-5px) rotate(10deg);
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 80%;
+                height: 100vh;
+                background: linear-gradient(135deg, var(--brown), #5E2C04);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: all 0.5s ease;
+                z-index: 1000;
+                background-image: url('https://www.transparenttextures.com/patterns/cartographer.png');
+            }
+            
+            .nav.active {
+                left: 0;
+            }
+            
+            .nav li {
+                margin: 1rem 0;
+            }
+            
+            .nav-toggle {
+                display: block;
+                z-index: 1001;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <!-- Animación de maíces -->
+        <i class="fas fa-corn corn-animation" style="top: 10%; left: 5%;"></i>
+        <i class="fas fa-corn corn-animation" style="top: 30%; left: 80%; animation-delay: 0.5s;"></i>
+        <i class="fas fa-corn corn-animation" style="top: 70%; left: 15%; animation-delay: 1s;"></i>
+        <i class="fas fa-corn corn-animation" style="top: 80%; left: 70%; animation-delay: 1.5s;"></i>
+        
+        <div class="header-content">
+            <div class="logo">
+                <img src="https://via.placeholder.com/80x80?text=🌽" alt="El Maíz Feliz">
+                <div class="logo-text">
+                    <h1>El Maíz Feliz</h1>
+                    <p>Tortillas artesanales 100% maíz</p>
+                </div>
+            </div>
+            
+            <button class="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav">
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Productos</a></li>
+                <li><a href="#">Sobre Nosotros</a></li>
+                <li><a href="#">Testimonios</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </div>
+    </header>
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- Tortillas flotantes como PNG -->
+        <div class="tortilla" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
+        <div class="tortilla" style="top: 40%; left: 80%; animation-delay: 0.5s; width: 80px; height: 80px;"></div>
+        <div class="tortilla" style="top: 70%; left: 15%; animation-delay: 1s; width: 120px; height: 120px;"></div>
+        
+        <div class="hero-content">
+            <h2>Tortillas hechas con amor y tradición</h2>
+            <p>Descubre el auténtico sabor del maíz nixtamalizado en cada una de nuestras tortillas recién hechas.</p>
+            <a href="#" class="btn">Ordenar ahora</a>
+        </div>
+    </section>
+
+   
+    <!-- Products Section -->
+    <section class="products">
+        <h2 class="section-title">Nuestros Productos</h2>
+       
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-badge">¡Nuevo!</div>
+                <img src="https://www.kindpng.com/picc/m/353-3534980_tortilla-wrap-png-download-como-se-dice-tortilla.png" alt="Tortillas de maíz" class="product-img">
+                <div class="product-content">
+                    <h3 class="product-title">Tortillas Tradicionales</h3>
+                    <p class="product-price">$15.00/kg</p>
+                    <p class="product-desc">Hechas a mano con maíz nixtamalizado, como las de antes.</p>
+                    <a href="#" class="btn">Agregar al carrito</a>
+                </div>
+            </div>
+                  <div class="product-card">
+                <div class="product-badge">¡Nuevo!</div>
+                <img src="https://keat.mx/cdn/shop/files/14800006_b596d7be-2b9c-4d2d-adef-11939e16a0db.webp?v=1699718754&width=1445" alt="Tortillas de maíz" class="product-img">
+                <div class="product-content">
+                    <h3 class="product-title">Totopos Tradicionales</h3>
+                    <p class="product-price">$15.00/kg</p>
+                    <p class="product-desc">Hechas a mano con maíz nixtamalizado, como las de antes.</p>
+                    <a href="#" class="btn">Agregar al carrito</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDXUeSpVUgfGcp19_He2uxnw8dgQ44ro2jIYPcMqHymFdvv30AQnUSqcC3WwCzEvmGzCA&usqp=CAU" alt="Tortillas azules" class="product-img">
+                <div class="product-content">
+                    <h3 class="product-title">Tortillas Azules</h3>
+                    <p class="product-price">$18.00/kg</p>
+                    <p class="product-desc">Elaboradas con maíz azul, ricas en antioxidantes.</p>
+                    <a href="#" class="btn">Agregar al carrito</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-badge">Más vendido</div>
+                <img src="https://iesod.com.mx/wp-content/uploads/2021/03/TOSTADA_MAIZ_3-01.jpg" alt="Tostadas" class="product-img">
+                <div class="product-content">
+                    <h3 class="product-title">Tostadas Artesanales</h3>
+                    <p class="product-price">$25.00/paquete</p>
+                    <p class="product-desc">Crujientes tostadas perfectas para tus garnachas.</p>
+                    <a href="#" class="btn">Agregar al carrito</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about texture-bg">
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Nuestra Historia</h3>
+                <p>Desde 1985, en "El Maíz Feliz" hemos mantenido viva la tradición de la tortilla artesanal. Nuestro secreto es simple: maíz de calidad, proceso de nixtamalización tradicional y mucho amor.</p>
+                <p>Usamos únicamente maíces criollos cultivados por pequeños productores mexicanos, garantizando autenticidad y apoyando la economía local.</p>
+                <p>Ven y descubre por qué somos la tortillería preferida de la ciudad.</p>
+                <a href="#" class="btn">Conoce más</a>
+            </div>
+            
+            <div class="about-image">
+                <img src="https://gourmetdemexico.com.mx/wp-content/uploads/2023/08/tostadas-de-tinga-3.jpg" alt="Proceso artesanal">
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+        
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text">Las mejores tortillas de la ciudad, desde que las probé no puedo comprar en otro lugar. El sabor auténtico me recuerda a las que hacía mi abuela.</p>
+                <div class="testimonial-author">
+                    <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="María González">
+                    <div>
+                        <div class="author-name">María González</div>
+                        <div>Cliente desde 2015</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <p class="testimonial-text">Increíble calidad y servicio. Las tortillas azules son mi debilidad, ¡y ahora mis hijos también las aman! Siempre frescas y deliciosas.</p>
+                <div class="testimonial-author">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Juan Pérez">
+                    <div>
+                        <div class="author-name">Juan Pérez</div>
+                        <div>Cliente frecuente</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <p class="testimonial-text">Como chef, exijo ingredientes de la más alta calidad. Las tortillas de "El Maíz Feliz" son el complemento perfecto para mis platillos tradicionales.</p>
+                <div class="testimonial-author">
+                    <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Chef Ana Martínez">
+                    <div>
+                        <div class="author-name">Chef Ana Martínez</div>
+                        <div>Restaurante "Sabores Mexicanos"</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Visítanos</h3>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div>
+                        <h4>Dirección</h4>
+                        <p>Calle del Maíz 123, Colonia Centro</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div>
+                        <h4>Horario</h4>
+                        <p>Lunes a Sábado: 7:00 am - 8:00 pm<br>
+                        Domingo: 7:00 am - 3:00 pm</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div>
+                        <h4>Teléfono</h4>
+                        <p>(55) 1234 5678</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div>
+                        <h4>Email</h4>
+                        <p>contacto@elmaizfeliz.com</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <h3>Envíanos un mensaje</h3>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Tu nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Tu email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Asunto" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" placeholder="Tu mensaje" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Enviar mensaje</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer texture-bg">
+        <div class="footer-logo">El Maíz Feliz</div>
+        
+        <div class="footer-links">
+            <a href="#" class="footer-link">Inicio</a>
+            <a href="#" class="footer-link">Productos</a>
+            <a href="#" class="footer-link">Sobre Nosotros</a>
+            <a href="#" class="footer-link">Testimonios</a>
+            <a href="#" class="footer-link">Contacto</a>
+            <a href="#" class="footer-link">Blog</a>
+            <a href="#" class="footer-link">Preguntas Frecuentes</a>
+        </div>
+        
+        <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+        </div>
+        
+        <p class="copyright">© 2023 Tortillería "El Maíz Feliz". Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Menú móvil
+        const navToggle = document.querySelector('.nav-toggle');
+        const nav = document.querySelector('.nav');
+        
+        navToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            navToggle.innerHTML = nav.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Animaciones al aparecer en pantalla
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.product-card, .testimonial-card, .about-image, .contact-form').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
